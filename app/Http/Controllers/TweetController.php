@@ -18,6 +18,7 @@ class TweetController extends Controller
     public function index()
     {
       $tweets = Tweet::getAllOrderByUpdated_at();
+      $badtweets = Tweet::getAllOrderByUpdated_at();
       return view('tweet.index',compact('tweets'));
     }
 
@@ -53,10 +54,10 @@ class TweetController extends Controller
       }
        // create()は最初から用意されている関数
        // 戻り値は挿入されたレコードの情報
-       $data = $request->merge(['user_id' => Auth::user()->id])->all();
-       $result = Tweet::create($data);
+        $data = $request->merge(['user_id' => Auth::user()->id])->all();
+        $result = Tweet::create($data);
        // ルーティング「todo.index」にリクエスト送信（一覧ページに移動）
-       return redirect()->route('tweet.index');
+        return redirect()->route('tweet.index');
     }
 
     /**
@@ -105,8 +106,8 @@ class TweetController extends Controller
           ->withErrors($validator);
       }
        //データ更新処理
-       $result = Tweet::find($id)->update($request->all());
-       return redirect()->route('tweet.index');
+        $result = Tweet::find($id)->update($request->all());
+        return redirect()->route('tweet.index');
     }
 
     /**
