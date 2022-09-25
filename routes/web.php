@@ -5,6 +5,8 @@ use App\Http\Controllers\TweetController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\BadController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,9 +30,13 @@ Route::group(['middleware' => 'auth'], function () {
     //favorite
     Route::post('tweet/{tweet}/favorites', [FavoriteController::class, 'store'])->name('favorites');
     Route::post('tweet/{tweet}/unfavorites', [FavoriteController::class, 'destroy'])->name('unfavorites');
+    //bad
+    Route::post('tweet/{tweet}/bads', [BadController::class, 'store'])->name('bads');
+    Route::post('tweet/{tweet}/unbads', [BadController::class, 'destroy'])->name('unbads');
+
     Route::get('/tweet/mypage', [TweetController::class, 'mydata'])->name('tweet.mypage');
     Route::resource('tweet', TweetController::class);
-  });
+});
 
 Route::get('/', function () {
     return view('welcome');
