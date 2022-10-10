@@ -16,15 +16,15 @@ class SearchController extends Controller
     public function index(Request $request)
     {
       // 🔽 空白削除
-      $keyword = trim($request->keyword);
-      $users  = User::where('name', 'like', "%{$keyword}%")->pluck('id')->all();
-      $tweets = Tweet::query()
-          ->where('tweet', 'like', "%{$keyword}%")
-          ->orwhere('description', 'like', "%{$keyword}%")
-          ->orwhereIn('user_id', $users)
-          ->get();
+        $keyword = trim($request->keyword);
+        $users  = User::where('name', 'like', "%{$keyword}%")->pluck('id')->all();
+        $tweets = Tweet::query()
+            ->where('tweet', 'like', "%{$keyword}%")
+            ->orwhere('description', 'like', "%{$keyword}%")
+            ->orwhereIn('user_id', $users)
+            ->get();
       //ddd($tweets);
-      return view('tweet.index', compact('tweets'));
+        return view('tweet.index', compact('tweets'));
     }
 
     /**

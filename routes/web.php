@@ -6,6 +6,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\BadController;
+use App\Http\Controllers\FullCalendarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('tweet', TweetController::class);
 });
 
+//calendar
+Route::get('full-calendar',[FullCalendarController::class,'index']);
+
+Route::post('full-calendar/action',[FullCalendarController::class,'action']);
 Route::get('/', function () {
     return view('welcome');
 });
